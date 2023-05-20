@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog Posts</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
+</head>
+<body style = background-color:rgb(219,184,251)>
+
+
+<div class="container-fluid">
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="{% url 'posts' %}">Admin Panel</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a href="{% url 'regist' %}" class="nav-item nav-link">Register</a>
+            <a href="{% url 'message' %}" class="nav-item nav-link">Messages</a>
+            <a href="{% url 'logout' %}" class="nav-item nav-link">Logout</a>
+        </div>
+    </div>
+</nav>
+    <div class="row mt-5">
+        <div class="col-lg-5">
+            <h1 class="mb-5">All Messages</h1>
+            {% if messages %}
+            <ul class="list-group">
+                {% for message in messages %}
+                <li class="list-group-item">
+                    <h5>{{ message.name }}</h5>
+                    <p>{{ message.date_modified|date:"F j, Y" }}</p>
+                    <p>{{ message.email }}</p>
+                    <p>{{ message.content }}</p>
+                    <a href="{% url 'deletemessage' pk=message.pk %}" class="btn btn-danger">Delete</a>
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>No messages have been submitted yet.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<footer class="bg-light text-center mt-5">
+    <p>Copyright &copy;
+        {% now "Y" %} My Blog. All rights reserved.
+    </p>
+</footer>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</body>
+</html>
